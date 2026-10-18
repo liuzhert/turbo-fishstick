@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Argentina Street View Lab</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 760px;
+  margin: 30px auto;
+  padding: 16px;
+  background: #f3f5f7;
+  color: #222;
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+button {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 8px;
+  background: #1769d2;
+  color: white;
+  font-size: 16px;
+  margin: 5px 0;
+}
+input {
+  padding: 10px;
+  width: 90%;
+  margin: 8px 0;
+}
+#status {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🇦🇷 Argentina Street View Lab</h1>
+  <p>阿根廷随机街景抽样器 · 第一版</p>
+  <p>目标：记录随机街景位置，为各省抽样概率研究积累数据。</p>
+</div>
+
+<div class="card">
+  <h2>抽样设置</h2>
+  <label>抽样次数：</label><br>
+  <input id="count" type="number" min="1" max="1000" value="10">
+  <br>
+  <button onclick="startSampling()">开始抽样</button>
+  <button onclick="exportCSV()">导出 CSV</button>
+  <button onclick="clearData()">清除记录</button>
+  <p id="status">网页已加载。当前版本先测试界面和数据记录。</p>
+</div>
+
+<div class="card">
+  <h2>抽样统计</h2>
+  <p>累计记录：<strong id="total">0</strong></p>
+  <p>说明：尚未接入随机街景生成程序，因此现在不会生成真实街景。</p>
+  <div id="results">暂无记录</div>
+</div>
+
+<script>
+let records = JSON.parse(
+  localStorage.getItem("argentinaSamples") || "[]"
+);
+
+function render() {
+  document.getElementById("total").textContent = records.length;
+  const counts = {};
+  records.forEach(r => {
+    counts[r.province || "待识别"] =
+      (counts[r.province || "待识别"] || 0) + 1;
+  });
+
+  document.getElementById("results").innerHTML =
+    Object.entries(counts)
+      .map(([name, n]) =>
+        `<p>${name}: ${n} 次 (${(100*n/records.length).toFixed(2)}%)</p>`
+      ).join("") || "暂无记录";
+}
+
+function startSampling() {
+  document.getElementById("status").textContent =
+    "界面测试完成，但随机街景接口尚未接入。现在不能生成真实样本。";
+}
+
+function exportCSV() {
+  const csv = "序号,纬度,经度,省份\n" +
+    records.map((r,i) =>
+      [i+1,r.lat||"",r.lng||"",r.province||""].join(",")
+    ).join("\n");
+  const blob = new Blob(["\uFEFF"+csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "argentina-streetview-samples.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function clearData() {
+  if (confirm("确定清除全部抽样记录吗？")) {
+    records = [];
+    localStorage.removeItem("argentinaSamples");
+    render();
+  }
+}
+
+render();
+</script>
+</body>
+</html>
