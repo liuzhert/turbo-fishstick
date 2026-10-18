@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Argentina Street View Lab</title>
+
 <style>
 body {
   font-family: Arial, sans-serif;
@@ -18,102 +19,247 @@ body {
   padding: 20px;
   border-radius: 14px;
   margin-bottom: 16px;
+  box-shadow: 0 2px 8px #0000000a;
 }
 button {
-  padding: 12px 18px;
+  padding: 12px 16px;
   border: 0;
   border-radius: 8px;
   background: #1769d2;
   color: white;
-  font-size: 16px;
-  margin: 5px 0;
+  font-size: 15px;
+  margin: 5px 3px 5px 0;
+}
+button.secondary {
+  background: #43845b;
+}
+button.danger {
+  background: #a94747;
 }
 input {
   padding: 10px;
   width: 90%;
   margin: 8px 0;
+  box-sizing: border-box;
 }
 #status {
   line-height: 1.7;
   overflow-wrap: anywhere;
 }
+#results {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.note {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
 </style>
 </head>
+
 <body>
+
 <div class="card">
   <h1>🇦🇷 Argentina Street View Lab</h1>
-  <p>阿根廷随机街景抽样器 · 第一版</p>
-  <p>目标：记录随机街景位置，为各省抽样概率研究积累数据。</p>
+  <p>阿根廷随机街景抽样器</p>
+  <p>目标：通过随机抽样，研究阿根廷各省的街景入选概率。</p>
 </div>
 
 <div class="card">
   <h2>抽样设置</h2>
-  <label>抽样次数：</label><br>
-  <input id="count" type="number" min="1" max="1000" value="10">
+
+  <label for="count">抽样次数：</label><br>
+  <input
+    id="count"
+    type="number"
+    min="1"
+    max="1000"
+    value="10"
+  >
+
   <br>
+
   <button onclick="startSampling()">开始抽样</button>
-  <button onclick="exportCSV()">导出 CSV</button>
-  <button onclick="clearData()">清除记录</button>
-  <p id="status">网页已加载。当前版本先测试界面和数据记录。</p>
+  <button class="secondary" onclick="exportCSV()">导出 CSV</button>
+  <button class="secondary" onclick="exportJSON()">导出 JSON</button>
+  <button class="danger" onclick="clearData()">清除记录</button>
+
+  <p id="status">
+    网页已加载。JSON 和 CSV 导出功能已就绪。
+  </p>
+
+  <p class="note">
+    注意：当前版本尚未接入真正的随机街景生成程序。
+    接入后，才能开始真实抽样。
+  </p>
 </div>
 
 <div class="card">
   <h2>抽样统计</h2>
-  <p>累计记录：<strong id="total">0</strong></p>
-  <p>说明：尚未接入随机街景生成程序，因此现在不会生成真实街景。</p>
+
+  <p>
+    累计记录：
+    <strong id="total">0</strong>
+  </p>
+
   <div id="results">暂无记录</div>
 </div>
 
 <script>
-let records = JSON.parse(
-  localStorage.getItem("argentinaSamples") || "[]"
-);
+const STORAGE_KEY = "argentinaSamples";
+
+let records = [];
+
+try {
+  records = JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "[]"
+  );
+
+  if (!Array.isArray(records)) {
+    records = [];
+  }
+} catch (error) {
+  records = [];
+}
+
+function saveData() {
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(records)
+    );
+  } catch (error) {
+    document.getElementById("status").textContent =
+      "保存失败。可能是浏览器存储空间不足。";
+  }
+}
 
 function render() {
-  document.getElementById("total").textContent = records.length;
+  document.getElementById("total").textContent =
+    records.length;
+
   const counts = {};
-  records.forEach(r => {
-    counts[r.province || "待识别"] =
-      (counts[r.province || "待识别"] || 0) + 1;
+
+  records.forEach(record => {
+    const province = record.province || "待识别";
+
+    counts[province] = (counts[province] || 0) + 1;
   });
 
-  document.getElementById("results").innerHTML =
-    Object.entries(counts)
-      .map(([name, n]) =>
-        `<p>${name}: ${n} 次 (${(100*n/records.length).toFixed(2)}%)</p>`
-      ).join("") || "暂无记录";
+  const results = document.getElementById("results");
+
+  if (records.length === 0) {
+    results.textContent = "暂无记录";
+    return;
+  }
+
+  results.innerHTML = Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([province, count]) => {
+      const percentage =
+        (100 * count / records.length).toFixed(2);
+
+      const row = document.createElement("p");
+      row.textContent =
+        `${province}：${count} 次（${percentage}%）`;
+
+      return row.outerHTML;
+    })
+    .join("");
 }
 
 function startSampling() {
   document.getElementById("status").textContent =
-    "界面测试完成，但随机街景接口尚未接入。现在不能生成真实样本。";
+    "界面正常，但随机街景接口尚未接入。下一步将接入真实街景抽样。";
+}
+
+function downloadFile(content, filename, mimeType) {
+  const blob = new Blob(
+    [content],
+    { type: mimeType }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = filename;
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function exportCSV() {
-  const csv = "序号,纬度,经度,省份\n" +
-    records.map((r,i) =>
-      [i+1,r.lat||"",r.lng||"",r.province||""].join(",")
-    ).join("\n");
-  const blob = new Blob(["\uFEFF"+csv], {
-    type: "text/csv;charset=utf-8;"
-  });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "argentina-streetview-samples.csv";
-  a.click();
-  URL.revokeObjectURL(url);
+  const headers = [
+    "序号",
+    "纬度",
+    "经度",
+    "省份",
+    "时间"
+  ];
+
+  const rows = records.map((record, index) => [
+    index + 1,
+    record.lat ?? "",
+    record.lng ?? "",
+    record.province ?? "",
+    record.time ?? ""
+  ]);
+
+  function escapeCSV(value) {
+    const text = String(value);
+
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+
+  const csv = [
+    headers,
+    ...rows
+  ]
+    .map(row => row.map(escapeCSV).join(","))
+    .join("\r\n");
+
+  downloadFile(
+    "\uFEFF" + csv,
+    "argentina-streetview-samples.csv",
+    "text/csv;charset=utf-8"
+  );
+}
+
+function exportJSON() {
+  const data = {
+    project: "Argentina Street View Lab",
+    exportedAt: new Date().toISOString(),
+    totalSamples: records.length,
+    records: records
+  };
+
+  downloadFile(
+    JSON.stringify(data, null, 2),
+    "argentina-streetview-samples.json",
+    "application/json;charset=utf-8"
+  );
 }
 
 function clearData() {
-  if (confirm("确定清除全部抽样记录吗？")) {
+  if (confirm("确定清除本浏览器保存的全部抽样记录吗？")) {
     records = [];
-    localStorage.removeItem("argentinaSamples");
+
+    localStorage.removeItem(STORAGE_KEY);
+
     render();
+
+    document.getElementById("status").textContent =
+      "记录已清除。";
   }
 }
 
 render();
 </script>
+
 </body>
 </html>
