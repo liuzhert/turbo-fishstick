@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Argentina Street View Lab</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 820px;
+      margin: 20px auto;
+      padding: 0 16px;
+      color: #222;
+    }
+    .card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px #0000000a;
+    }
+    button {
+      padding: 11px 14px;
+      border: 0;
+      border-radius: 7px;
+      background: #1769d2;
+      color: white;
+      font-size: 14px;
+      margin: 5px 5px 5px 0;
+      cursor: pointer;
+    }
+    button.secondary { background: #45a8b5; }
+    button.danger { background: #d9534f; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    input {
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      margin: 8px 0;
+    }
+    #status {
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .muted {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    a { color: #1769d2; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Argentina Street View Lab</h1>
+    <p class="muted">
+      在浏览器里随机抽取 Google 街景覆盖条件下的、各地区被随机抽中的概率。<br>
+      数据保存在浏览器的 localStorage 中。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>1. 抽样设置</h2>
+    <label for="count">本次抽样数量：</label>
+    <input id="count" type="number" min="1" max="1000" value="10" />
+    <br>
+    <button id="startBtn" onclick="startSampling()">开始随机抽样</button>
+    <button class="secondary" onclick="openLatest()">打开最新街景</button>
+    <br>
+    <button class="secondary" onclick="exportCSV()">导出 CSV</button>
+    <button class="secondary" onclick="exportJSON()">导出 JSON</button>
+    <button class="danger" onclick="clearData()">清除记录</button>
+    <p id="status">正在初始化抽样程序……</p>
+    <p id="latest"></p>
+    <p class="muted">
+      每次最多 1000 个位置。建议先测试 5~10 个，<br>
+      确认可以打开、且街景正常后，再扩大样本量；<br>
+      生成坐标不依赖任何人检查过该处街景。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>2. 抽样记录</h2>
+    <p>累计记录：<strong id="total">0</strong> 个</p>
+    <p id="results">暂无记录。</p>
+  </div>
+
+  <script type="module">
+    import { randomStreetView } from 'https://esm.sh/random-street-view';
+
+    const STORAGE_KEY = 'argentinaSamples';
+    const COUNTRY_URL =
+      'https://raw.githubusercontent.com/ginnyh/CountryGeoJSON/master/argentina.geojson';
+
+    let records = [];
+    let samplerReady = false;
+    let sampling = false;
+    let latestRecord = null;
+
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      if (Array.isArray(stored)) {
+        records = stored;
+      }
+    } catch (error) {
+      console.error('记录读取失败：', error);
+    }
+
+    function setStatus(message) {
+      document.getElementById('status').textContent = message;
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(records)
+        );
+      } catch (error) {
+        setStatus('浏览器存储已满。请先导出 JSON 备份后清理。');
+      }
+    }
+
+    function render() {
+      document.getElementById('total').textContent = records.length;
+      const counts = {};
+      for (const record of records) {
+        const country = record.province || '尚未识别省份';
+        counts[country] = (counts[country] || 0) + 1;
+      }
+
+      const results = document.getElementById('results');
+      if (!records.length) {
+        results.textContent = '暂无记录。';
+        return;
+      }
+
+      results.innerHTML = '';
+      Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([name, count]) => {
+          const p = document.createElement('p');
+          const percent = count / records.length * 100;
+          p.textContent = `${name}：${count} 次（${percent.toFixed(2)}%）`;
+          results.appendChild(p);
+        });
+
+      const last = records[records.length - 1];
+      latestRecord = last;
+      const latestEl = document.getElementById('latest');
+      latestEl.replaceChildren();
+
+      if (Number.isFinite(last.lat) && Number.isFinite(last.lng)) {
+        const a = document.createElement('a');
+        a.href = streetViewURL(last.lat, last.lng);
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = `打开最新位置：${last.lat.toFixed(6)}, ${last.lng.toFixed(6)}`;
+        latestEl.appendChild(a);
+      }
+    }
+
+    function streetViewURL(lat, lng) {
+      return `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
+    }
+
+    function getOuterRings(geometry) {
+      if (!geometry) return [];
+
+      if (geometry.type === 'Polygon') {
+        return geometry.coordinates;
+      }
+
+      if (geometry.type === 'MultiPolygon') {
+        return geometry.coordinates.map(polygon => polygon[0]);
+      }
+
+      return [];
+    }
+
+    async function initializeSampler() {
+      setStatus('正在加载阿根廷国界数据……');
+      const response = await fetch(COUNTRY_URL);
+      if (!response.ok) {
+        throw new Error(`无法下载阿根廷国界数据，HTTP ${response.status}`);
+      }
+
+      const geojson = await response.json();
+      let geometry = geojson;
+
+      if (geojson.type === 'FeatureCollection') {
+        const feature = geojson.features.find(f =>
+          f.properties &&
+          f.properties.name &&
+          f.properties.name.toLowerCase() === 'argentina'
+        );
+
+        if (!feature) {
+          throw new Error('国界文件中未找到 Argentina。');
+        }
+
+        geometry = feature.geometry;
+      } else if (geojson.type === 'Feature') {
+        geometry = geojson.geometry;
+      }
+
+      // GeoJSON 使用 [经度, 纬度]。
+      // 抽样库要求 [纬度, 经度]。
+      // 转换坐标顺序。
+      const rings = getOuterRings(geometry);
+      if (!rings.length) {
+        throw new Error('无法读取阿根廷国界多边形。');
+      }
+
+      const paths = rings.map(ring => ring.map(point => [point[1], point[0]]));
+
+      await randomStreetView.setParameters({
+        polygon: paths,
+        type: 'sv',
+        distribution: 'weighted',
+        enableCaching: true,
+        cacheKey: 'argentina-streetview-lab-v1',
+      });
+      samplerReady = true;
+
+      setStatus('抽样程序初始化成功。建议先生成 5~10 个位置进行测试。');
+    }
+
+    window.startSampling = async function () {
+      if (sampling) return;
+      if (!samplerReady) {
+        setStatus('抽样程序尚未初始化，请稍等或刷新页面。');
+        return;
+      }
+
+      const countInput = document.getElementById('count');
+      const count = Number(countInput.value);
+      if (!Number.isInteger(count) || count < 1 || count > 1000) {
+        setStatus('请输入 1 到 1000 之间的整数。');
+        return;
+      }
+
+      sampling = true;
+      document.getElementById('startBtn').disabled = true;
+      let failed = 0;
+
+      try {
+        for (let i = 0; i < count; i++) {
+          setStatus(`正在抽样：${i + 1}/${count} ...`);
+          try {
+            const location = await randomStreetView.getRandomLocation();
+            // console.log('getRandomLocation result:', location);
+
+            if (
+              Array.isArray(location) &&
+              Number.isFinite(location[0]) &&
+              Number.isFinite(location[1])
+            ) {
+              const record = {
+                lat: location[0],
+                lng: location[1],
+                province: '',
+                time: new Date().toISOString(),
+                method: 'random-street-view weighted',
+                source: 'Google Street View sampling',
+              };
+
+              records.push(record);
+              latestRecord = record;
+            } else {
+              failed++;
+            }
+          } catch (error) {
+            console.error('本次抽样失败：', error);
+          }
+
+          // 每一条都保存，避免中途关闭丢失数据。
+          saveData();
+          if ((i + 1) % 5 === 0 || i === count - 1) {
+            render();
+          }
+        }
+        setStatus(
+          `本次完成：计划 ${count} 个，成功 ${count - failed} 个，` +
+          `失败 ${failed} 个。累计记录 ${records.length} 条。`
+        );
+      } finally {
+        sampling = false;
+        document.getElementById('startBtn').disabled = false;
+        render();
+      }
+    };
+
+    window.openLatest = function () {
+      if (!latestRecord) {
+        setStatus('目前还没有可打开的抽样位置。');
+        return;
+      }
+      window.open(
+        streetViewURL(latestRecord.lat, latestRecord.lng),
+        '_blank',
+        'noopener'
+      );
+    };
+
+    function downloadFile(content, filename, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    }
+
+    window.exportCSV = function () {
+      if (!records.length) {
+        setStatus('暂无记录可导出。');
+        return;
+      }
+
+      const rows = records.map(r => ({
+        r_lat: r.lat,
+        r_lng: r.lng,
+        r_province: r.province || '',
+        r_time: r.time,
+        r_method: r.method || '',
+        r_source: r.source || '',
+      }));
+
+      const escapeCSV = value => {
+        const s = String(value ?? '');
+        if (s.includes('"') || s.includes(',') || s.includes('\n')) {
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      };
+
+      const headers = Object.keys(rows[0]);
+      const csv = [
+        headers.join(','),
+        ...rows.map(row => headers.map(h => escapeCSV(row[h])).join(','))
+      ].join('\n');
+
+      downloadFile(
+        '\uFEFF' + csv,
+        'argentina-streetview-samples.csv',
+        'text/csv;charset=utf-8'
+      );
+    };
+
+    window.exportJSON = function () {
+      if (!records.length) {
+        setStatus('暂无记录可导出。');
+        return;
+      }
+
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        totalSamples: records.length,
+        records,
+        refs: {
+          source: 'Google Street View sampled locations',
+          method: 'random-street-view weighted',
+        },
+      };
+
+      downloadFile(
+        JSON.stringify(payload, null, 2),
+        'argentina-streetview-samples.json',
+        'application/json;charset=utf-8'
+      );
+    };
+
+    window.clearData = function () {
+      if (!confirm('确定要清空浏览器保存的全部抽样记录吗？')) {
+        return;
+      }
+
+      records = [];
+      latestRecord = null;
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+      setStatus('本地抽样记录已清除。');
+    };
+
+    render();
+
+    initializeSampler().catch(error => {
+      console.error(error);
+      setStatus(
+        '初始化失败：' + error.message +
+        '\n请检查网络、地区名称、边界数据，或稍后重试。'
+      );
+    });
+  </script>
+</body>
+</html>
