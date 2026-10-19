@@ -95,11 +95,65 @@
 
     const STORAGE_KEY = 'argentinaSamples';
     const COUNTRY_URL = "https://raw.githubusercontent.com/glynnbird/countriesgeojson/master/argentina.geojson";
-
+    const PROVINCES_URL = "https://apis.datos.gob.ar/georef/api/v2.0/provincias.geojson";
+    
     let records = [];
     let samplerReady = false;
     let sampling = false;
     let latestRecord = null;
+    
+let provinceFeatures = [];
+
+function pointInRing(lon, lat, ring) {
+  let inside = false;
+
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const xi = ring[i][0], yi = ring[i][1];
+    const xj = ring[j][0], yj = ring[j][1];
+
+    const crosses =
+      ((yi > lat) !== (yj > lat)) &&
+      (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi);
+
+    if (crosses) inside = !inside;
+  }
+
+  return inside;
+}
+
+function pointInGeometry(lon, lat, geometry) {
+  if (!geometry) return false;
+
+  const polygons = geometry.type === "Polygon"
+    ? [geometry.coordinates]
+    : geometry.type === "MultiPolygon"
+      ? geometry.coordinates
+      : [];
+
+  return polygons.some(rings => {
+    if (!rings.length || !pointInRing(lon, lat, rings[0])) {
+      return false;
+    }
+
+    // 排除多边形内部的洞
+    return !rings.slice(1).some(ring => pointInRing(lon, lat, ring));
+  });
+}
+
+function identifyProvince(lat, lng) {
+  const feature = provinceFeatures.find(item =>
+    pointInGeometry(lng, lat, item.geometry)
+  );
+
+  if (!feature) return "未匹配";
+
+  const props = feature.properties || {};
+
+  return props.nombre ||
+    props.name ||
+    props.nombre_largo ||
+    "未匹配";
+}
 
     try {
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -184,7 +238,22 @@
 
     async function initializeSampler() {
       try { randomStreetView = (await import("https://esm.sh/random-streetview")).default; } catch (error) { throw new Error("随机街景模块加载失败：" + error.message); }
-      setStatus('正在加载阿根廷国界数据……');
+      setStatus("正在加载阿根廷国界和省级边界数据……");
+
+      const provinceResponse = await fetch(PROVINCES_URL);
+
+if (!provinceResponse.ok) {
+  throw new Error("省级边界下载失败，HTTP " + provinceResponse.status);
+}
+
+const provinceGeoJSON = await provinceResponse.json();
+
+provinceFeatures = provinceGeoJSON.features || [];
+
+if (provinceFeatures.length === 0) {
+  throw new Error("省级边界数据为空或格式不正确");
+}
+
       const response = await fetch(COUNTRY_URL);
       if (!response.ok) {
         throw new Error(`无法下载阿根廷国界数据，HTTP ${response.status}`);
@@ -264,7 +333,7 @@
               const record = {
                 lat: location[0],
                 lng: location[1],
-                province: '',
+                province: identifyProvince(location[0], location[1]),
                 time: new Date().toISOString(),
                 method: 'random-street-view weighted',
                 source: 'Google Street View sampling',
