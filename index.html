@@ -91,7 +91,7 @@
   </div>
 
   <script type="module">
-    import { randomStreetView } from 'https://esm.sh/random-street-view';
+    let randomStreetView;
 
     const STORAGE_KEY = 'argentinaSamples';
     const COUNTRY_URL =
@@ -184,6 +184,7 @@
     }
 
     async function initializeSampler() {
+      try { randomStreetView = (await import("https://esm.sh/random-streetview")).default; } catch (error) { throw new Error("随机街景模块加载失败：" + error.message); }
       setStatus('正在加载阿根廷国界数据……');
       const response = await fetch(COUNTRY_URL);
       if (!response.ok) {
