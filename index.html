@@ -240,7 +240,8 @@ function identifyProvince(lat, lng) {
       try { randomStreetView = (await import("https://esm.sh/random-streetview")).default; } catch (error) { throw new Error("随机街景模块加载失败：" + error.message); }
       setStatus("正在加载阿根廷国界和省级边界数据……");
 
-      const provinceResponse = await fetch(PROVINCES_URL);
+      
+const provinceResponse = await fetch(PROVINCES_URL);
 
 if (!provinceResponse.ok) {
   throw new Error("省级边界下载失败，HTTP " + provinceResponse.status);
@@ -248,7 +249,24 @@ if (!provinceResponse.ok) {
 
 const provinceGeoJSON = await provinceResponse.json();
 
-provinceFeatures = provinceGeoJSON.features || [];
+if (Array.isArray(provinceGeoJSON.features)) {
+  provinceFeatures = provinceGeoJSON.features;
+} else if (Array.isArray(provinceGeoJSON.datos)) {
+  provinceFeatures = provinceGeoJSON.datos.map(item => ({
+    type: "Feature",
+    properties: item,
+    geometry: item.geometria
+  }));
+} else {
+  throw new Error("省界数据格式不符合预期");
+}
+
+provinceFeatures = provinceFeatures.filter(item => item.geometry);
+
+if (provinceFeatures.length === 0) {
+  throw new Error("没有读取到有效的省界多边形");
+}
+
 
 if (provinceFeatures.length === 0) {
   throw new Error("省级边界数据为空或格式不正确");
