@@ -1,0 +1,56 @@
+Street View Lab 更新与上传说明
+
+推荐下载 streetview-update.zip。这是更新包，不包含原有六国 GeoJSON。
+
+一、下载
+1. 点击聊天中的“streetview-update.zip”下载链接。
+2. 若出现文件预览，请点击预览界面的下载按钮。
+3. Chrome/Edge 可按 Ctrl+J 打开下载记录，查找 streetview-update.zip，再点击“在文件夹中显示”。
+4. 在 Windows 中右键 ZIP → 全部解压。不要直接将 ZIP 上传 GitHub。
+
+二、更新 GitHub
+1. 打开你原来的 liuzhert/turbo-fishstick 仓库，确认仍是原来运行网页的分支。
+2. 不删除仓库中的任何原有 GeoJSON。
+3. 点击 Add file → Upload files。
+4. 打开解压文件夹，把里面的 index.html、五个 .mjs 文件、USA-ADM1.geojson、USA-source.json、data 文件夹和说明文件拖入上传区域。
+   注意：拖“文件夹里面的内容”，不要拖额外包了一层的外目录。
+5. 点击 Commit changes。路径相同的程序文件会更新；没有上传的旧 GeoJSON 保持不动。
+6. 保持原来的 GitHub Pages 设置不变。部署完成后打开原网页，按 Ctrl+F5 强制刷新。
+
+三、最终目录
+仓库根目录必须包含：
+index.html
+app.mjs
+geo-core.mjs
+ratio-core.mjs
+ratio-ui.mjs
+ratio-worker.mjs
+ARG-ADM1.geojson   ← 保留原文件
+CHL-ADM1.geojson   ← 保留原文件
+BRA-ADM1.geojson   ← 保留原文件
+PER-ADM1.geojson   ← 保留原文件
+COL-ADM1.geojson   ← 保留原文件
+MEX-ADM1.geojson   ← 保留原文件
+USA-ADM1.geojson   ← 本次新增
+USA-source.json   ← 本次新增
+README.md
+UPLOAD_GUIDE.txt
+data/             ← 整个目录上传，与 index.html 同级
+  ARG-country.geojson
+  boundary-code-map.json
+  vali-templates.json
+  vali-SubdivisionWeights.cs
+  VALI-LICENSE.txt
+
+已有的其他来源说明、README 或文件不必特意删除。数据转换表兼容已检查的原仓库六国 GeoJSON，并补充 ISO 代码；不会修改这些旧文件。
+
+四、确认更新成功
+页面应出现上下两个区域：“生成器”和“配比器”。
+国家下拉框应有“美国”，州选择应含 Alaska、Hawaii、California 等。
+配比器可选择 JSON 文件计算。上传后若提示某文件 404，请按上面的目录核对路径与大小写，尤其检查 data 是否被多套了一层文件夹。
+
+五、保留旧生成记录
+旧生成记录存储在原浏览器，而不是 GitHub 的 GeoJSON 中。
+更新前最好在旧网页“导出统计备份”。之后继续使用同一浏览器和原网页地址，不清理网站数据，即可保留原有记录。
+
+完整包 streetview-full.zip 是备用方案，包含七国边界及全部程序。希望保留现有六国 GeoJSON 时，请优先使用 streetview-update.zip。
