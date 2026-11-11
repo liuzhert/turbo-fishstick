@@ -1,0 +1,1414 @@
+{
+  "source": "https://github.com/slashP/Vali",
+  "commit": "d961e46700395197ba0bb793381ed6a8e89f1e2e",
+  "file": "src/Vali.Core/SubdivisionWeights.cs",
+  "retrievedAt": "2026-11-11",
+  "countries": {
+    "ARG": {
+      "iso2": "AR",
+      "totalWeight": 111024,
+      "subdivisions": [
+        {
+          "code": "AR-A",
+          "weight": 5061,
+          "valiName": "Salta",
+          "name": "Salta"
+        },
+        {
+          "code": "AR-B",
+          "weight": 7573,
+          "valiName": "Buenos Aires",
+          "name": "Buenos Aires"
+        },
+        {
+          "code": "AR-C",
+          "weight": 421,
+          "valiName": "Buenos Aires city",
+          "name": "Ciudad Autónoma de Buenos Aires"
+        },
+        {
+          "code": "AR-D",
+          "weight": 4051,
+          "valiName": "San Luis",
+          "name": "San Luis"
+        },
+        {
+          "code": "AR-E",
+          "weight": 4170,
+          "valiName": "Entre Rios",
+          "name": "Entre Ríos"
+        },
+        {
+          "code": "AR-F",
+          "weight": 4490,
+          "valiName": "La Rioja",
+          "name": "La Rioja"
+        },
+        {
+          "code": "AR-G",
+          "weight": 4580,
+          "valiName": "Santiago del Estero",
+          "name": "Santiago del Estero"
+        },
+        {
+          "code": "AR-H",
+          "weight": 4516,
+          "valiName": "Chaco",
+          "name": "Chaco"
+        },
+        {
+          "code": "AR-J",
+          "weight": 4504,
+          "valiName": "San Juan",
+          "name": "San Juan"
+        },
+        {
+          "code": "AR-K",
+          "weight": 4485,
+          "valiName": "Catamarca",
+          "name": "Catamarca"
+        },
+        {
+          "code": "AR-L",
+          "weight": 4743,
+          "valiName": "La Pampa",
+          "name": "La Pampa"
+        },
+        {
+          "code": "AR-M",
+          "weight": 5356,
+          "valiName": "Mendoza",
+          "name": "Mendoza"
+        },
+        {
+          "code": "AR-N",
+          "weight": 3682,
+          "valiName": "Misiones",
+          "name": "Misiones"
+        },
+        {
+          "code": "AR-P",
+          "weight": 3421,
+          "valiName": "Formosa",
+          "name": "Formosa"
+        },
+        {
+          "code": "AR-Q",
+          "weight": 4974,
+          "valiName": "Neuquen",
+          "name": "Neuquén"
+        },
+        {
+          "code": "AR-R",
+          "weight": 6210,
+          "valiName": "Rio Negro",
+          "name": "Río Negro"
+        },
+        {
+          "code": "AR-S",
+          "weight": 4832,
+          "valiName": "Santa Fe",
+          "name": "Santa Fe"
+        },
+        {
+          "code": "AR-T",
+          "weight": 3270,
+          "valiName": "Tucuman",
+          "name": "Tucumán"
+        },
+        {
+          "code": "AR-U",
+          "weight": 6577,
+          "valiName": "Chubut",
+          "name": "Chubut"
+        },
+        {
+          "code": "AR-V",
+          "weight": 3170,
+          "valiName": "Tierra del Fuego",
+          "name": "Tierra del Fuego, Antártida e Islas del Atlántico Sur"
+        },
+        {
+          "code": "AR-W",
+          "weight": 4416,
+          "valiName": "Corrientes",
+          "name": "Corrientes"
+        },
+        {
+          "code": "AR-X",
+          "weight": 5620,
+          "valiName": "Cordoba",
+          "name": "Córdoba"
+        },
+        {
+          "code": "AR-Y",
+          "weight": 3770,
+          "valiName": "Jujuy",
+          "name": "Jujuy"
+        },
+        {
+          "code": "AR-Z",
+          "weight": 7132,
+          "valiName": "Santa Cruz",
+          "name": "Santa Cruz"
+        }
+      ]
+    },
+    "CHL": {
+      "iso2": "CL",
+      "totalWeight": 8000,
+      "subdivisions": [
+        {
+          "code": "CL-AI",
+          "weight": 950,
+          "valiName": "Region Aysen",
+          "name": "Región de Aysén del Gral.Ibañez del Campo"
+        },
+        {
+          "code": "CL-AN",
+          "weight": 900,
+          "valiName": "Antofagasta",
+          "name": "Región de Antofagasta"
+        },
+        {
+          "code": "CL-AP",
+          "weight": 300,
+          "valiName": "Arica and Parinacota",
+          "name": "Región de Arica y Parinacota"
+        },
+        {
+          "code": "CL-AR",
+          "weight": 400,
+          "valiName": "Araucania",
+          "name": "Región de La Araucanía"
+        },
+        {
+          "code": "CL-AT",
+          "weight": 700,
+          "valiName": "Atacama",
+          "name": "Región de Atacama"
+        },
+        {
+          "code": "CL-BI",
+          "weight": 250,
+          "valiName": "Biobio",
+          "name": "Región del Bío-Bío"
+        },
+        {
+          "code": "CL-CO",
+          "weight": 600,
+          "valiName": "Coquimbo",
+          "name": "Región de Coquimbo"
+        },
+        {
+          "code": "CL-LI",
+          "weight": 250,
+          "valiName": "O'Higgins",
+          "name": "Región del Libertador Bernardo O'Higgins"
+        },
+        {
+          "code": "CL-LL",
+          "weight": 800,
+          "valiName": "Lagos",
+          "name": "Región de Los Lagos"
+        },
+        {
+          "code": "CL-LR",
+          "weight": 300,
+          "valiName": "Rios",
+          "name": "Región de Los Ríos"
+        },
+        {
+          "code": "CL-MA",
+          "weight": 600,
+          "valiName": "Magellan",
+          "name": "Región de Magallanes y Antártica Chilena"
+        },
+        {
+          "code": "CL-ML",
+          "weight": 450,
+          "valiName": "Maule",
+          "name": "Región del Maule"
+        },
+        {
+          "code": "CL-NB",
+          "weight": 200,
+          "valiName": "Nuble",
+          "name": "Región de Ñuble"
+        },
+        {
+          "code": "CL-RM",
+          "weight": 350,
+          "valiName": "Region Metropolitana",
+          "name": "Región Metropolitana de Santiago"
+        },
+        {
+          "code": "CL-TA",
+          "weight": 500,
+          "valiName": "Tarapaca",
+          "name": "Región de Tarapacá"
+        },
+        {
+          "code": "CL-VS",
+          "weight": 450,
+          "valiName": "Valparaiso",
+          "name": "Región de Valparaíso"
+        }
+      ]
+    },
+    "BRA": {
+      "iso2": "BR",
+      "totalWeight": 98237,
+      "subdivisions": [
+        {
+          "code": "BR-AC",
+          "weight": 1349,
+          "valiName": "Acre",
+          "name": "Acre"
+        },
+        {
+          "code": "BR-AL",
+          "weight": 1437,
+          "valiName": "Alagoas",
+          "name": "Alagoas"
+        },
+        {
+          "code": "BR-AM",
+          "weight": 1191,
+          "valiName": "Amazonas",
+          "name": "Amazonas"
+        },
+        {
+          "code": "BR-AP",
+          "weight": 1180,
+          "valiName": "Amapa",
+          "name": "Amapa"
+        },
+        {
+          "code": "BR-BA",
+          "weight": 9413,
+          "valiName": "Bahia",
+          "name": "Bahia"
+        },
+        {
+          "code": "BR-CE",
+          "weight": 3790,
+          "valiName": "Ceara",
+          "name": "Ceara"
+        },
+        {
+          "code": "BR-DF",
+          "weight": 250,
+          "valiName": "Federal District",
+          "name": "Distrito Federal"
+        },
+        {
+          "code": "BR-ES",
+          "weight": 2048,
+          "valiName": "Espirito Santo",
+          "name": "Espirito Santo"
+        },
+        {
+          "code": "BR-GO",
+          "weight": 6448,
+          "valiName": "Goias",
+          "name": "Goias"
+        },
+        {
+          "code": "BR-MA",
+          "weight": 3779,
+          "valiName": "Maranhao",
+          "name": "Maranhao"
+        },
+        {
+          "code": "BR-MG",
+          "weight": 10537,
+          "valiName": "Minas Gerais",
+          "name": "Minas Gerais"
+        },
+        {
+          "code": "BR-MS",
+          "weight": 4510,
+          "valiName": "Mato Grosso do Sul",
+          "name": "Mato Grosso do Sul"
+        },
+        {
+          "code": "BR-MT",
+          "weight": 6126,
+          "valiName": "Mato Grosso",
+          "name": "Mato Grosso"
+        },
+        {
+          "code": "BR-PA",
+          "weight": 3751,
+          "valiName": "Para",
+          "name": "Para"
+        },
+        {
+          "code": "BR-PB",
+          "weight": 2021,
+          "valiName": "Paraiba",
+          "name": "Paraiba"
+        },
+        {
+          "code": "BR-PE",
+          "weight": 2736,
+          "valiName": "Pernambuco",
+          "name": "Pernambuco"
+        },
+        {
+          "code": "BR-PI",
+          "weight": 3729,
+          "valiName": "Piaui",
+          "name": "Piaui"
+        },
+        {
+          "code": "BR-PR",
+          "weight": 5913,
+          "valiName": "Parana",
+          "name": "Parana"
+        },
+        {
+          "code": "BR-RJ",
+          "weight": 2021,
+          "valiName": "Rio de Janeiro",
+          "name": "Rio de Janeiro"
+        },
+        {
+          "code": "BR-RN",
+          "weight": 2032,
+          "valiName": "Rio Grande do Norte",
+          "name": "Rio Grande do Norte"
+        },
+        {
+          "code": "BR-RO",
+          "weight": 2190,
+          "valiName": "Rondonia",
+          "name": "Rondonia"
+        },
+        {
+          "code": "BR-RR",
+          "weight": 1715,
+          "valiName": "Roraima",
+          "name": "Roraima"
+        },
+        {
+          "code": "BR-RS",
+          "weight": 4510,
+          "valiName": "Rio Grande do Sul",
+          "name": "Rio Grande do Sul"
+        },
+        {
+          "code": "BR-SC",
+          "weight": 2992,
+          "valiName": "Santa Catarina",
+          "name": "Santa Catarina"
+        },
+        {
+          "code": "BR-SE",
+          "weight": 1355,
+          "valiName": "Sergipe",
+          "name": "Sergipe"
+        },
+        {
+          "code": "BR-SP",
+          "weight": 7081,
+          "valiName": "Sao Paulo",
+          "name": "Sao Paulo"
+        },
+        {
+          "code": "BR-TO",
+          "weight": 4133,
+          "valiName": "Tocantins",
+          "name": "Tocantins"
+        }
+      ]
+    },
+    "PER": {
+      "iso2": "PE",
+      "totalWeight": 9374,
+      "subdivisions": [
+        {
+          "code": "PE-AMA",
+          "weight": 180,
+          "valiName": "Amazonas",
+          "name": "Amazonas"
+        },
+        {
+          "code": "PE-ANC",
+          "weight": 563,
+          "valiName": "Ancash",
+          "name": "Ancash"
+        },
+        {
+          "code": "PE-APU",
+          "weight": 165,
+          "valiName": "Region de Apurimac",
+          "name": "Apurímac"
+        },
+        {
+          "code": "PE-ARE",
+          "weight": 822,
+          "valiName": "Arequipa",
+          "name": "Arequipa"
+        },
+        {
+          "code": "PE-AYA",
+          "weight": 266,
+          "valiName": "Ayacucho",
+          "name": "Ayacucho"
+        },
+        {
+          "code": "PE-CAJ",
+          "weight": 587,
+          "valiName": "Cajamarca",
+          "name": "Cajamarca"
+        },
+        {
+          "code": "PE-CAL",
+          "weight": 37,
+          "valiName": "Callao",
+          "name": "El Callao"
+        },
+        {
+          "code": "PE-CUS",
+          "weight": 426,
+          "valiName": "Cusco",
+          "name": "Cusco"
+        },
+        {
+          "code": "PE-HUC",
+          "weight": 310,
+          "valiName": "Region de Huanuco",
+          "name": "Huánuco"
+        },
+        {
+          "code": "PE-HUV",
+          "weight": 261,
+          "valiName": "Huancavelica",
+          "name": "Huancavelica"
+        },
+        {
+          "code": "PE-ICA",
+          "weight": 343,
+          "valiName": "Ica",
+          "name": "Ica"
+        },
+        {
+          "code": "PE-JUN",
+          "weight": 512,
+          "valiName": "Junin",
+          "name": "Junín"
+        },
+        {
+          "code": "PE-LAL",
+          "weight": 641,
+          "valiName": "La Libertad",
+          "name": "La Libertad"
+        },
+        {
+          "code": "PE-LAM",
+          "weight": 386,
+          "valiName": "Lambayeque",
+          "name": "Lambayeque"
+        },
+        {
+          "code": "PE-LIM",
+          "weight": 962,
+          "valiName": "Lima",
+          "name": "Lima"
+        },
+        {
+          "code": "PE-LOR",
+          "weight": 58,
+          "valiName": "Loreto",
+          "name": "Loreto"
+        },
+        {
+          "code": "PE-MDD",
+          "weight": 182,
+          "valiName": "Madre de Dios",
+          "name": "Madre de Dios"
+        },
+        {
+          "code": "PE-MOQ",
+          "weight": 199,
+          "valiName": "Departamento de Moquegua",
+          "name": "Moquegua"
+        },
+        {
+          "code": "PE-PAS",
+          "weight": 222,
+          "valiName": "Pasco",
+          "name": "Pasco"
+        },
+        {
+          "code": "PE-PIU",
+          "weight": 571,
+          "valiName": "Piura",
+          "name": "Piura"
+        },
+        {
+          "code": "PE-PUN",
+          "weight": 668,
+          "valiName": "Puno",
+          "name": "Puno"
+        },
+        {
+          "code": "PE-SAM",
+          "weight": 489,
+          "valiName": "Region de San Martin",
+          "name": "San Martín"
+        },
+        {
+          "code": "PE-TAC",
+          "weight": 264,
+          "valiName": "Tacna",
+          "name": "Tacna"
+        },
+        {
+          "code": "PE-TUM",
+          "weight": 133,
+          "valiName": "Tumbes",
+          "name": "Tumbes"
+        },
+        {
+          "code": "PE-UCA",
+          "weight": 127,
+          "valiName": "Ucayali",
+          "name": "Ucayali"
+        }
+      ]
+    },
+    "COL": {
+      "iso2": "CO",
+      "totalWeight": 65474,
+      "subdivisions": [
+        {
+          "code": "CO-AMA",
+          "weight": 25,
+          "valiName": "Amazonas",
+          "name": "Amazonas"
+        },
+        {
+          "code": "CO-ANT",
+          "weight": 4335,
+          "valiName": "Antioquia",
+          "name": "Antioquia"
+        },
+        {
+          "code": "CO-ARA",
+          "weight": 1186,
+          "valiName": "Arauca",
+          "name": "Arauca"
+        },
+        {
+          "code": "CO-ATL",
+          "weight": 1717,
+          "valiName": "Atlantico",
+          "name": "Atlántico"
+        },
+        {
+          "code": "CO-BOL",
+          "weight": 1988,
+          "valiName": "Bolivar",
+          "name": "Bolívar"
+        },
+        {
+          "code": "CO-BOY",
+          "weight": 2569,
+          "valiName": "Boyaca",
+          "name": "Boyacá"
+        },
+        {
+          "code": "CO-CAL",
+          "weight": 2024,
+          "valiName": "Caldas",
+          "name": "Caldas"
+        },
+        {
+          "code": "CO-CAQ",
+          "weight": 1380,
+          "valiName": "Caqueta",
+          "name": "Caquetá"
+        },
+        {
+          "code": "CO-CAS",
+          "weight": 3299,
+          "valiName": "Casanare",
+          "name": "Casanare"
+        },
+        {
+          "code": "CO-CAU",
+          "weight": 3017,
+          "valiName": "Cauca",
+          "name": "Cauca"
+        },
+        {
+          "code": "CO-CES",
+          "weight": 1918,
+          "valiName": "Cesar",
+          "name": "Cesar"
+        },
+        {
+          "code": "CO-CHO",
+          "weight": 1717,
+          "valiName": "Choco",
+          "name": "Chocó"
+        },
+        {
+          "code": "CO-COR",
+          "weight": 2280,
+          "valiName": "Cordoba",
+          "name": "Córdoba"
+        },
+        {
+          "code": "CO-CUN",
+          "weight": 4010,
+          "valiName": "Cundinamarca",
+          "name": "Cundinamarca"
+        },
+        {
+          "code": "CO-DC",
+          "weight": 1004,
+          "valiName": "Distrito Capital de Bogota",
+          "name": "Bogota Capital District"
+        },
+        {
+          "code": "CO-GUA",
+          "weight": 0,
+          "valiName": "Guainia",
+          "name": "Guainía"
+        },
+        {
+          "code": "CO-GUV",
+          "weight": 360,
+          "valiName": "Guaviare",
+          "name": "Guaviare"
+        },
+        {
+          "code": "CO-HUI",
+          "weight": 2479,
+          "valiName": "Huila",
+          "name": "Huila"
+        },
+        {
+          "code": "CO-LAG",
+          "weight": 2208,
+          "valiName": "La Guajira",
+          "name": "La Guajira"
+        },
+        {
+          "code": "CO-MAG",
+          "weight": 2354,
+          "valiName": "Magdalena",
+          "name": "Magdalena"
+        },
+        {
+          "code": "CO-MET",
+          "weight": 4191,
+          "valiName": "Meta",
+          "name": "Meta"
+        },
+        {
+          "code": "CO-NAR",
+          "weight": 3514,
+          "valiName": "Narino",
+          "name": "Nariño"
+        },
+        {
+          "code": "CO-NSA",
+          "weight": 2501,
+          "valiName": "Norte de Santander",
+          "name": "Norte de Santander"
+        },
+        {
+          "code": "CO-PUT",
+          "weight": 1610,
+          "valiName": "Putumayo",
+          "name": "Putumayo"
+        },
+        {
+          "code": "CO-QUI",
+          "weight": 1186,
+          "valiName": "Quindio",
+          "name": "Quindío"
+        },
+        {
+          "code": "CO-RIS",
+          "weight": 1610,
+          "valiName": "Risaralda",
+          "name": "Risaralda"
+        },
+        {
+          "code": "CO-SAN",
+          "weight": 3203,
+          "valiName": "Santander",
+          "name": "Santander"
+        },
+        {
+          "code": "CO-SAP",
+          "weight": 70,
+          "valiName": "San Andrés",
+          "name": "Archipiélago de San Andrés, Providencia y Santa Catalina"
+        },
+        {
+          "code": "CO-SUC",
+          "weight": 1710,
+          "valiName": "Sucre",
+          "name": "Sucre"
+        },
+        {
+          "code": "CO-TOL",
+          "weight": 2673,
+          "valiName": "Tolima",
+          "name": "Tolima"
+        },
+        {
+          "code": "CO-VAC",
+          "weight": 3226,
+          "valiName": "Valle del Cauca",
+          "name": "Valle del Cauca"
+        },
+        {
+          "code": "CO-VAU",
+          "weight": 0,
+          "valiName": "Vaupes",
+          "name": "Vaupés"
+        },
+        {
+          "code": "CO-VID",
+          "weight": 110,
+          "valiName": "Vichada",
+          "name": "Vichada"
+        }
+      ]
+    },
+    "MEX": {
+      "iso2": "MX",
+      "totalWeight": 105150,
+      "subdivisions": [
+        {
+          "code": "MX-AGU",
+          "weight": 1250,
+          "valiName": "Aguascalientes",
+          "name": "Aguascalientes"
+        },
+        {
+          "code": "MX-BCN",
+          "weight": 3450,
+          "valiName": "Baja California",
+          "name": "Baja California"
+        },
+        {
+          "code": "MX-BCS",
+          "weight": 3450,
+          "valiName": "Baja California Sur",
+          "name": "Baja California Sur"
+        },
+        {
+          "code": "MX-CAM",
+          "weight": 3800,
+          "valiName": "Campeche",
+          "name": "Campeche"
+        },
+        {
+          "code": "MX-CHH",
+          "weight": 4300,
+          "valiName": "Chihuahua",
+          "name": "Chihuahua"
+        },
+        {
+          "code": "MX-CHP",
+          "weight": 4600,
+          "valiName": "Chiapas",
+          "name": "Chiapas"
+        },
+        {
+          "code": "MX-CMX",
+          "weight": 450,
+          "valiName": "Mexico City",
+          "name": "Ciudad de México"
+        },
+        {
+          "code": "MX-COA",
+          "weight": 3800,
+          "valiName": "Coahuila de Zaragoza",
+          "name": "Coahuila de Zaragoza"
+        },
+        {
+          "code": "MX-COL",
+          "weight": 1350,
+          "valiName": "Colima",
+          "name": "Colima"
+        },
+        {
+          "code": "MX-DUR",
+          "weight": 4200,
+          "valiName": "Durango",
+          "name": "Durango"
+        },
+        {
+          "code": "MX-GRO",
+          "weight": 3150,
+          "valiName": "Guerrero",
+          "name": "Guerrero"
+        },
+        {
+          "code": "MX-GUA",
+          "weight": 3050,
+          "valiName": "Guanajuato",
+          "name": "Guanajuato"
+        },
+        {
+          "code": "MX-HID",
+          "weight": 2400,
+          "valiName": "Hidalgo",
+          "name": "Hidalgo"
+        },
+        {
+          "code": "MX-JAL",
+          "weight": 4600,
+          "valiName": "Jalisco",
+          "name": "Jalisco"
+        },
+        {
+          "code": "MX-MEX",
+          "weight": 2600,
+          "valiName": "Mexico",
+          "name": "Mexico"
+        },
+        {
+          "code": "MX-MIC",
+          "weight": 3700,
+          "valiName": "Michoacan de Ocampo",
+          "name": "Michoacan de Ocampo"
+        },
+        {
+          "code": "MX-MOR",
+          "weight": 1300,
+          "valiName": "Morelos",
+          "name": "Morelos"
+        },
+        {
+          "code": "MX-NAY",
+          "weight": 2500,
+          "valiName": "Nayarit",
+          "name": "Nayarit"
+        },
+        {
+          "code": "MX-NLE",
+          "weight": 3900,
+          "valiName": "Nuevo Leon",
+          "name": "Nuevo Leon"
+        },
+        {
+          "code": "MX-OAX",
+          "weight": 4700,
+          "valiName": "Oaxaca",
+          "name": "Oaxaca"
+        },
+        {
+          "code": "MX-PUE",
+          "weight": 3700,
+          "valiName": "Puebla",
+          "name": "Puebla"
+        },
+        {
+          "code": "MX-QUE",
+          "weight": 1800,
+          "valiName": "Queretaro",
+          "name": "Queretaro de Arteaga"
+        },
+        {
+          "code": "MX-ROO",
+          "weight": 4100,
+          "valiName": "Quintana Roo",
+          "name": "Quintana Roo"
+        },
+        {
+          "code": "MX-SIN",
+          "weight": 3500,
+          "valiName": "Sinaloa",
+          "name": "Sinaloa"
+        },
+        {
+          "code": "MX-SLP",
+          "weight": 4100,
+          "valiName": "San Luis Potosi",
+          "name": "San Luis Potosi"
+        },
+        {
+          "code": "MX-SON",
+          "weight": 4200,
+          "valiName": "Sonora",
+          "name": "Sonora"
+        },
+        {
+          "code": "MX-TAB",
+          "weight": 3200,
+          "valiName": "Tabasco",
+          "name": "Tabasco"
+        },
+        {
+          "code": "MX-TAM",
+          "weight": 4000,
+          "valiName": "Tamaulipas",
+          "name": "Tamaulipas"
+        },
+        {
+          "code": "MX-TLA",
+          "weight": 1200,
+          "valiName": "Tlaxcala",
+          "name": "Tlaxcala"
+        },
+        {
+          "code": "MX-VER",
+          "weight": 5000,
+          "valiName": "Veracruz-Llave",
+          "name": "Veracruz de Ignacio de la Llave"
+        },
+        {
+          "code": "MX-YUC",
+          "weight": 4000,
+          "valiName": "Yucatan",
+          "name": "Yucatan"
+        },
+        {
+          "code": "MX-ZAC",
+          "weight": 3800,
+          "valiName": "Zacatecas",
+          "name": "Zacatecas"
+        }
+      ]
+    },
+    "USA": {
+      "iso2": "US",
+      "totalWeight": 109585,
+      "subdivisions": [
+        {
+          "code": "US-AL",
+          "weight": 1950,
+          "valiName": "Alabama",
+          "name": "Alabama"
+        },
+        {
+          "code": "US-AK",
+          "weight": 1400,
+          "valiName": "Alaska",
+          "name": "Alaska"
+        },
+        {
+          "code": "US-AZ",
+          "weight": 2550,
+          "valiName": "Arizona",
+          "name": "Arizona"
+        },
+        {
+          "code": "US-AR",
+          "weight": 1950,
+          "valiName": "Arkansas",
+          "name": "Arkansas"
+        },
+        {
+          "code": "US-CA",
+          "weight": 4750,
+          "valiName": "California",
+          "name": "California"
+        },
+        {
+          "code": "US-CO",
+          "weight": 2750,
+          "valiName": "Colorado",
+          "name": "Colorado"
+        },
+        {
+          "code": "US-CT",
+          "weight": 925,
+          "valiName": "Connecticut",
+          "name": "Connecticut"
+        },
+        {
+          "code": "US-DE",
+          "weight": 590,
+          "valiName": "Delaware",
+          "name": "Delaware"
+        },
+        {
+          "code": "US-FL",
+          "weight": 2525,
+          "valiName": "Florida",
+          "name": "Florida"
+        },
+        {
+          "code": "US-GA",
+          "weight": 2525,
+          "valiName": "Georgia",
+          "name": "Georgia"
+        },
+        {
+          "code": "US-HI",
+          "weight": 1075,
+          "valiName": "Hawaii",
+          "name": "Hawaii"
+        },
+        {
+          "code": "US-ID",
+          "weight": 3050,
+          "valiName": "Idaho",
+          "name": "Idaho"
+        },
+        {
+          "code": "US-IL",
+          "weight": 2600,
+          "valiName": "Illinois",
+          "name": "Illinois"
+        },
+        {
+          "code": "US-IN",
+          "weight": 1985,
+          "valiName": "Indiana",
+          "name": "Indiana"
+        },
+        {
+          "code": "US-IA",
+          "weight": 1950,
+          "valiName": "Iowa",
+          "name": "Iowa"
+        },
+        {
+          "code": "US-KS",
+          "weight": 2090,
+          "valiName": "Kansas",
+          "name": "Kansas"
+        },
+        {
+          "code": "US-KY",
+          "weight": 1950,
+          "valiName": "Kentucky",
+          "name": "Kentucky"
+        },
+        {
+          "code": "US-LA",
+          "weight": 1850,
+          "valiName": "Louisiana",
+          "name": "Louisiana"
+        },
+        {
+          "code": "US-ME",
+          "weight": 1900,
+          "valiName": "Maine",
+          "name": "Maine"
+        },
+        {
+          "code": "US-MD",
+          "weight": 1175,
+          "valiName": "Maryland",
+          "name": "Maryland"
+        },
+        {
+          "code": "US-MA",
+          "weight": 1075,
+          "valiName": "Massachusetts",
+          "name": "Massachusetts"
+        },
+        {
+          "code": "US-MI",
+          "weight": 2250,
+          "valiName": "Michigan",
+          "name": "Michigan"
+        },
+        {
+          "code": "US-MN",
+          "weight": 2250,
+          "valiName": "Minnesota",
+          "name": "Minnesota"
+        },
+        {
+          "code": "US-MS",
+          "weight": 1900,
+          "valiName": "Mississippi",
+          "name": "Mississippi"
+        },
+        {
+          "code": "US-MO",
+          "weight": 1925,
+          "valiName": "Missouri",
+          "name": "Missouri"
+        },
+        {
+          "code": "US-MT",
+          "weight": 3200,
+          "valiName": "Montana",
+          "name": "Montana"
+        },
+        {
+          "code": "US-NE",
+          "weight": 2300,
+          "valiName": "Nebraska",
+          "name": "Nebraska"
+        },
+        {
+          "code": "US-NV",
+          "weight": 2300,
+          "valiName": "Nevada",
+          "name": "Nevada"
+        },
+        {
+          "code": "US-NH",
+          "weight": 965,
+          "valiName": "New Hampshire",
+          "name": "New Hampshire"
+        },
+        {
+          "code": "US-NJ",
+          "weight": 1180,
+          "valiName": "New Jersey",
+          "name": "New Jersey"
+        },
+        {
+          "code": "US-NM",
+          "weight": 2470,
+          "valiName": "New Mexico",
+          "name": "New Mexico"
+        },
+        {
+          "code": "US-NY",
+          "weight": 3325,
+          "valiName": "New York",
+          "name": "New York"
+        },
+        {
+          "code": "US-NC",
+          "weight": 2500,
+          "valiName": "North Carolina",
+          "name": "North Carolina"
+        },
+        {
+          "code": "US-ND",
+          "weight": 2330,
+          "valiName": "North Dakota",
+          "name": "North Dakota"
+        },
+        {
+          "code": "US-OH",
+          "weight": 2575,
+          "valiName": "Ohio",
+          "name": "Ohio"
+        },
+        {
+          "code": "US-OK",
+          "weight": 2280,
+          "valiName": "Oklahoma",
+          "name": "Oklahoma"
+        },
+        {
+          "code": "US-OR",
+          "weight": 2875,
+          "valiName": "Oregon",
+          "name": "Oregon"
+        },
+        {
+          "code": "US-PA",
+          "weight": 3030,
+          "valiName": "Pennsylvania",
+          "name": "Pennsylvania"
+        },
+        {
+          "code": "US-RI",
+          "weight": 475,
+          "valiName": "Rhode Island",
+          "name": "Rhode Island"
+        },
+        {
+          "code": "US-SC",
+          "weight": 1675,
+          "valiName": "South Carolina",
+          "name": "South Carolina"
+        },
+        {
+          "code": "US-SD",
+          "weight": 2260,
+          "valiName": "South Dakota",
+          "name": "South Dakota"
+        },
+        {
+          "code": "US-TN",
+          "weight": 2390,
+          "valiName": "Tennessee",
+          "name": "Tennessee"
+        },
+        {
+          "code": "US-TX",
+          "weight": 4290,
+          "valiName": "Texas",
+          "name": "Texas"
+        },
+        {
+          "code": "US-UT",
+          "weight": 2680,
+          "valiName": "Utah",
+          "name": "Utah"
+        },
+        {
+          "code": "US-VT",
+          "weight": 1000,
+          "valiName": "Vermont",
+          "name": "Vermont"
+        },
+        {
+          "code": "US-VA",
+          "weight": 2700,
+          "valiName": "Virginia",
+          "name": "Virginia"
+        },
+        {
+          "code": "US-WA",
+          "weight": 2815,
+          "valiName": "Washington",
+          "name": "Washington"
+        },
+        {
+          "code": "US-WV",
+          "weight": 1930,
+          "valiName": "West Virginia",
+          "name": "West Virginia"
+        },
+        {
+          "code": "US-WI",
+          "weight": 2225,
+          "valiName": "Wisconsin",
+          "name": "Wisconsin"
+        },
+        {
+          "code": "US-WY",
+          "weight": 2775,
+          "valiName": "Wyoming",
+          "name": "Wyoming"
+        },
+        {
+          "code": "US-DC",
+          "weight": 100,
+          "valiName": "District of Columbia",
+          "name": "District of Columbia"
+        }
+      ]
+    }
+  },
+  "boundaryCodeCorrections": [
+    {
+      "country": "CHL",
+      "name": "Región de Antofagasta",
+      "sourceCode": "CHL",
+      "code": "CL-AN"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Arica y Parinacota",
+      "sourceCode": "CHL",
+      "code": "CL-AP"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Atacama",
+      "sourceCode": "CHL",
+      "code": "CL-AT"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Aysén del Gral.Ibañez del Campo",
+      "sourceCode": "CHL",
+      "code": "CL-AI"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Coquimbo",
+      "sourceCode": "CHL",
+      "code": "CL-CO"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de La Araucanía",
+      "sourceCode": "CHL",
+      "code": "CL-AR"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Los Lagos",
+      "sourceCode": "CHL",
+      "code": "CL-LL"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Los Ríos",
+      "sourceCode": "CHL",
+      "code": "CL-LR"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Magallanes y Antártica Chilena",
+      "sourceCode": "CHL",
+      "code": "CL-MA"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Ñuble",
+      "sourceCode": "CHL",
+      "code": "CL-NB"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Tarapacá",
+      "sourceCode": "CHL",
+      "code": "CL-TA"
+    },
+    {
+      "country": "CHL",
+      "name": "Región de Valparaíso",
+      "sourceCode": "CHL",
+      "code": "CL-VS"
+    },
+    {
+      "country": "CHL",
+      "name": "Región del Bío-Bío",
+      "sourceCode": "CHL",
+      "code": "CL-BI"
+    },
+    {
+      "country": "CHL",
+      "name": "Región del Libertador Bernardo O'Higgins",
+      "sourceCode": "CHL",
+      "code": "CL-LI"
+    },
+    {
+      "country": "CHL",
+      "name": "Región del Maule",
+      "sourceCode": "CHL",
+      "code": "CL-ML"
+    },
+    {
+      "country": "CHL",
+      "name": "Región Metropolitana de Santiago",
+      "sourceCode": "CHL",
+      "code": "CL-RM"
+    },
+    {
+      "country": "PER",
+      "name": "Lima Metropolitana",
+      "sourceCode": "PE-LMA*",
+      "code": "PE-LMA"
+    },
+    {
+      "country": "MEX",
+      "name": "Ciudad de México",
+      "sourceCode": "MX-MEX",
+      "code": "MX-CMX"
+    },
+    {
+      "country": "USA",
+      "name": "South Dakota",
+      "sourceCode": "SU-SD",
+      "code": "US-SD"
+    }
+  ]
+}
